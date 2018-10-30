@@ -145,6 +145,14 @@ def create_filename(dt, **kw):
                 files.append('{}03_{:{fmt}}.fsi_gz'.format(
                     kw['id'], dt - timedelta(hours=1),
                     fmt="%Y-%m-%d-%H-50"))
+            if i == 'fsi3d':
+                files.append('{}04_{:{fmt}}.fsi_gz'.format(
+                    kw['id'], dt - timedelta(hours=1),
+                    fmt="%Y-%m-%d-%H-40"))
+            if i == 'adcp':
+                files.append('{}02_{:{fmt}}.adc_gz'.format(
+                    kw['id'], dt - timedelta(hours=1),
+                    fmt="%Y-%m-%d-%H-50"))                    
     if kw['software'] == 'DADAS':
         for i in kw['sensors']:
             if i == 'young':
@@ -153,6 +161,12 @@ def create_filename(dt, **kw):
             if i == 'fsi2d':
                 files.append('{}03_{:{fmt}}.fsi_gz'.format(
                     kw['id'], dt, fmt="%Y-%m-%d-%H-00"))
+            if i == 'fsi3d':
+                files.append('{}04_{:{fmt}}.fsi_gz'.format(
+                    kw['id'], dt, fmt="%Y-%m-%d-%H-00"))
+            if i == 'adcp':
+                files.append('{}02_{:{fmt}}.adc_gz'.format(
+                    kw['id'], dt, fmt="%Y-%m-%d-%H-00"))                    
     return files
 
 
@@ -203,10 +217,12 @@ if __name__ == '__main__':
 
     dt = datetime.utcnow()
     ftp_servers = getparams(dname)
-
     for i in ftp_servers:
         kw = ftp_servers[i]
-        server = FTP_connection(i, kw['software'], dname)
-        files = create_filename(dt, **kw)
-        [server.download_file(j, kw['path']) for j in files]
-        server.quit()
+        try:
+            server = FTP_connection(i, kw['software'], str(dname))
+            files = create_filename(dt, **kw)
+            [server.download_file(j, kw['path']) for j in files]
+            server.quit()
+        except Exception:
+            print('servidor sem conexão em {}'.format(i))
