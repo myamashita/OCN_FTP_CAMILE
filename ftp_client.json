@@ -1,14 +1,14 @@
-{
+{ 
+    "MI00214634": {
+        "sync": 0,
+        "software": "SISMO",
+        "ext": ["yng_gz", "fsi_gz"],
+        "path": "C:\\Users\\aojq\\github\\OCN_FTP_CAMILE"
+    },
     "MI00210165": {
-        "id": 43,
+        "sync": 0,
         "software": "SISMO",
-        "sensors": ["young"],
-        "path": "\\\\sbcnas03\\ussub-gds_ocn\\Confidencial\\Dados_UCDs\\DESV\\CAMILE\\PRA1\\HIST"
-    }, 
-    "MV00002534": {
-        "id": 185,
-        "software": "SISMO",
-        "sensors": ["young"],
-        "path": "\\\\sbcnas03\\ussub-gds_ocn\\Confidencial\\Dados_UCDs\\DESV\\CAMILE\\EDINC\\HIST"
-    }     
+        "ext": ["yng_gz"],
+        "path": "C:\\Users\\aojq\\github\\OCN_FTP_CAMILE"
+    }           
 }
